@@ -14,5 +14,5 @@ def shuffle(deck):
     random.shuffle(deck)
     return deck
 
-def get_deck:
+def get_deck():
     return shuffle(make_deck)
