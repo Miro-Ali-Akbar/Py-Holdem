@@ -41,7 +41,20 @@ def count_hand(hand_list):
 def get_counted_hand(player_hand, board):
     return count_hand(numbers_hand_list(get_all_cards(player_hand, board)))
 
+#kollar om handen har fyrtal, kåk, triss eller par
+def multiple_cards(player_hand, board):
+    temp_list = get_counted_hand(player_hand, board)
+    for x in range (0, len(temp_list)):
+        if temp_list[x] == 4:
+            return "fyrtal"
+        elif temp_list[x] == 3:
+            for x in range (0, len(temp_list)):
+                if temp_list[x] == 2:
+                    return "kåk"
+            return "triss"
+        elif temp_list[x] == 2:
+            return "par"
 
-hand = [("dum", 1), ("hell", 1)]
+hand = [("dum", 1), ("hell", 1), ("james", 2), ("jefferson", 2)]
 board = [("hello", 1)]
 print(get_counted_hand(hand, board))
