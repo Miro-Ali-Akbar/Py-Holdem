@@ -47,14 +47,53 @@ def multiple_cards(player_hand, board):
     for x in range (0, len(temp_list)):
         if temp_list[x] == 4:
             return "fyrtal"
-        elif temp_list[x] == 3:
+    for x in range (0, len(temp_list)):
+        if temp_list[x] == 3:
             for x in range (0, len(temp_list)):
                 if temp_list[x] == 2:
                     return "kåk"
             return "triss"
-        elif temp_list[x] == 2:
+    for x in range (0, len(temp_list)):
+        if temp_list[x] == 2:
             return "par"
 
-hand = [("dum", 1), ("hell", 1), ("james", 2), ("jefferson", 2)]
+# Tar två händer som båda har fyrtal, kåk, triss eller par och bestämmer vem som har bäst
+# returnerar true om hand 1 är en bättre hand än två
+def if_same_amount(hand1, hand2, board):
+    first_player = get_counted_hand(hand1, board)
+    second_player = get_counted_hand(hand2, board)
+# första handens värde
+    hand = multiple_cards(hand1, board)
+    if hand == "fyrtal":
+        best_hand1 = first_player.index(4)
+    elif hand == "kåk":
+        best_hand1 = first_player.index(3)
+    elif hand == "triss":
+        best_hand1 = first_player.index(3)
+    elif hand == "par":
+        best_hand1 = first_player.index(2)
+# andra handens bästa värde
+    second_hand = multiple_cards(hand2, board)
+    if second_hand == "fyrtal":
+        best_hand2 = second_player.index(4)
+    elif second_hand == "kåk":
+        best_hand2 = second_player.index(3)
+    elif second_hand == "triss":
+        best_hand2 = second_player.index(3)
+    elif second_hand == "par":
+        best_hand2 = second_player.index(2)
+# får vilken valör som var högst för varje hand
+    if best_hand1 == 0:
+        return True
+    elif best_hand2 == 0:
+        return False
+    elif best_hand1 > best_hand2:
+        return True
+    else:
+        return False
+    
+hand = [("dum", 1), ("hell", 1), ("james", 2), ("james", 2), ("james", 2), ("jefferson", 2)]
+hand2 =[("dum", 3), ("hell", 3), ("james", 2), ("jefferson", 2),("james", 2), ("hell", 3), ("hell", 3)]
 board = [("hello", 1)]
 print(get_counted_hand(hand, board))
+print(if_same_amount(hand, hand2, board))
