@@ -41,6 +41,27 @@ def count_hand(hand_list):
 def get_counted_hand(player_hand, board):
     return count_hand(numbers_hand_list(get_all_cards(player_hand, board)))
 
+# fix för färg
+'''
+# returnerar lista med alla färeger från en hand
+def numbers_color_list(temp_list):
+    hand_list = []
+    for x in range (0,len(temp_list)):
+        hand_list.append(temp_list[x][0])
+    return hand_list
+
+#räknar alla färger
+def color_hand(hand_list):
+    card_list = 4*[0]
+    for x in range (0, len(hand_list)):
+        card_list[hand_list[x]-1] += 1
+    return card_list
+
+# sätter ihopp alla de övre funtionerna, tar in listorna handen och board returnar lista med antal av varje värde
+def get_color_hand(player_hand, board):
+    return color_hand(numbers_color_list(get_all_cards(player_hand, board)))
+'''
+
 #kollar om handen har fyrtal, kåk, triss eller par
 def multiple_cards(player_hand, board):
     temp_list = get_counted_hand(player_hand, board)
@@ -91,9 +112,27 @@ def if_same_amount(hand1, hand2, board):
         return True
     else:
         return False
+'''   
+# Rolyal flush returnerar True om det är en Royal flush
+def is_royal_flush(hand,board):
     
+    temp_hand = get_counted_hand(hand, board)
+    temp_hand.append(temp_hand.pop(0))
+'''
+# returnerar högsta valören som handen har om den inte har något annat
+def highest_card(hand, board):
+    temp_hand = get_counted_hand(hand, board)
+    temp_tal = temp_hand.pop(0)
+    temp_hand.append(temp_tal)
+    for x in range (len(temp_hand)-1, 0, -1):
+        if temp_hand[x] == 1:
+            return x+2
+
+
 hand = [("dum", 1), ("hell", 1), ("james", 2), ("james", 2), ("james", 2), ("jefferson", 2)]
 hand2 =[("dum", 3), ("hell", 3), ("james", 2), ("jefferson", 2),("james", 2), ("hell", 3), ("hell", 3)]
 board = [("hello", 1)]
 print(get_counted_hand(hand, board))
-print(if_same_amount(hand, hand2, board))
+print(multiple_cards(hand, board))
+print(get_counted_hand(hand2, board))
+print(multiple_cards(hand2, board))
