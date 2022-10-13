@@ -117,28 +117,30 @@ def if_same_amount(hand1, hand2, board):
         return True
     else:
         return False
-'''
+
 # Rolyal flush returnerar True om det är en Royal flush
 def is_royal_flush(hand,board):
     all_color = False
-    all_cards = True
+    all_cards = False
     royal_flush = False
     right_color = 4
+    number_to_color = ["Hjärter", "Spader", "Klöver", "Ruter"]
     temp_list_color = (get_color_hand(hand, board))
 # lista med färger
-    temp_list_number = (get_counted_hand(hand, board))
-    temp_list_number.append(temp_list_number.pop(0))
-# lista med siffror varav ess är sist
-    for x in temp_list_color:
-        if x == 5:
+    temp_list = get_all_cards(hand, board)
+# lista med alla kort
+    for x in range (0, len(temp_list_color)):
+        if temp_list_color[x] >= 5:
             all_color = True
-            right_color = templist[x]
-    if all_color == True:
-        for x in range (9, 13):
-            if temp_list_number[x] != 1 :
-                all_cards = False
+            right_color = x
+    right_color = number_to_color[right_color]
+    if all_color:
+        all_cards = (right_color, 1) in temp_list and (right_color, 13) in temp_list and (right_color, 12) in temp_list and (right_color, 11) in temp_list and (right_color, 10) in temp_list
+        
+
+    royal_flush = all_cards and all_color
     return royal_flush
-'''
+
 # returnerar högsta valören som handen har om den inte har något annat
 def highest_card(hand, board):
     temp_hand = get_counted_hand(hand, board)
@@ -149,7 +151,7 @@ def highest_card(hand, board):
             return x+2
 
 
-hand = [("Hjärter", 1), ("Spader", 1), ("Spader", 2), ("Klöver", 2), ("Ruter", 2), ("Ruter", 2)]
+hand = [("Hjärter", 1), ("Hjärter", 13), ("Hjärter", 12), ("Hjärter", 11), ("Hjärter", 10)]
 hand2 =[("Spader", 3), ("Hjärter", 3), ("Klöver", 2), ("Hjärter", 2),("Ruter", 2), ("Klöver", 3), ("Ruter", 3)]
 board = [("Hjärter", 1)]
 print(get_counted_hand(hand, board))
@@ -158,3 +160,4 @@ print(get_counted_hand(hand2, board))
 print(multiple_cards(hand2, board))
 print(get_color_hand(hand, board))
 print(numbers_color_list(hand))
+print(is_royal_flush(hand, board))
