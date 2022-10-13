@@ -92,14 +92,16 @@ def if_same_amount(hand1, hand2, board):
     elif second_hand == "par":
         best_hand2 = second_player.index(2)
 # får vilken valör som var högst för varje hand
-    if best_hand1 == 0:
-        return True
+    if best_hand1 == best_hand2:
+        return None
+    elif best_hand1 == 0:
+        return hand1
     elif best_hand2 == 0:
-        return False
+        return hand2
     elif best_hand1 > best_hand2:
-        return True
+        return hand1
     else:
-        return False
+        return hand2
 
 # Rolyal flush returnerar True om det är en Royal flush
 def is_royal_flush(hand,board):
@@ -158,7 +160,6 @@ def is_straight_flush(hand, board):
 
 # returnerar True om det är en flush
 def is_flush(hand, board):
-    all_color = False
     flush = False
     temp_list_color = (get_color_hand(hand, board))
 # lista med färger
@@ -198,12 +199,17 @@ def hand_worth(hand, board):
     elif card == "par":
         worth = 9
     else:
-        worth = 10+highest_card(hand, board)
+        worth = 25 - highest_card(hand, board)
     return worth
 
-# returnerar handen som är best
+# returnerar handen som är best None om ingen hand är bättre än den andra
 def best_hand(hand1, hand2, board):
+    temp_hand_list = [3, 4, 7, 8]
     if hand_worth(hand1, board) < hand_worth(hand2, board):
         return hand1
-    else:
+    elif hand_worth(hand1, board) > hand_worth(hand2, board):
         return hand2
+    elif hand_worth(hand1, board) in temp_hand_list and hand_worth(hand1, board) == hand_worth(hand2, board):
+        return if_same_amount(hand1, hand2, board)
+    else:
+        return None
