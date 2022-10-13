@@ -179,7 +179,7 @@ def is_flush(hand, board):
 	# lista med färger
 	for x in range(0, len(temp_list_color)):
 		if temp_list_color[x] >= 5:
-		flush = True
+			flush = True
 	return flush
 
 # returnerar True om det är en straight
