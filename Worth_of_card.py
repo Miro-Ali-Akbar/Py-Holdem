@@ -93,7 +93,7 @@ def if_same_amount(hand1, hand2, board):
         best_hand2 = second_player.index(2)
 # får vilken valör som var högst för varje hand
     if best_hand1 == best_hand2:
-        return None
+        return []
     elif best_hand1 == 0:
         return hand1
     elif best_hand2 == 0:
@@ -202,7 +202,7 @@ def hand_worth(hand, board):
         worth = 25 - highest_card(hand, board)
     return worth
 
-# returnerar handen som är best None om ingen hand är bättre än den andra
+# returnerar handen som är best tom lista om ingen hand är bättre än den andra
 def best_hand(hand1, hand2, board):
     temp_hand_list = [3, 4, 7, 8]
     if hand_worth(hand1, board) < hand_worth(hand2, board):
@@ -212,4 +212,4 @@ def best_hand(hand1, hand2, board):
     elif hand_worth(hand1, board) in temp_hand_list and hand_worth(hand1, board) == hand_worth(hand2, board):
         return if_same_amount(hand1, hand2, board)
     else:
-        return None
+        return []
