@@ -1,6 +1,69 @@
 import random
 from Worth_of_card import *
 
+'''
+-----------
+Game start:
+-----------
+Bestäm antal spelare gör make_money_dictionary och gör lista på antal spelare med _make_player_list
+
+----------
+RoundStart
+----------
+Make deck with getdeck()
+vinstpengar = 0
+________
+Startbet: 
+alla startpengar dras från dictionarin med pengar läggs i vinstpengar
+__________________________________________________________
+Deal 2 cards to all players player_1 to player_playerNmber:
+pop kort i deck
+____________
+Betting time
+_____________________
+Deal 3 cards to board
+pop kort i deck
+____________
+Betting time
+______________________________________
+One more card to board to a total of 4
+pop kort i deck
+____________
+Betting time
+______________________________________
+One more card to board to a total of 5
+pop kort i deck
+____________
+Betting time
+
+Händer jämförs och spelaren med vinnarens hand får vinstpengar via best_hand
+
+__________
+Round over
+
+Om bara en sperare har pengar vinner den
+
+----------------------------------------
+____________
+Betting time
+
+Alla går runt och bettar via ordern rotate_order lista där första spelaren väljer summa pengar att betta.
+
+summan kontorleras att finnas i listan -spelaren har råd att betta
+
+(går till nästa samma mänsika som får välja att calla, maxbet, höja maxbet eller fold)*playerNmbr
+
+när alla har callat maxbet eller fold så går spelet vidare
+
+_____
+Extra
+
+om en spelare har mindre pengar än startbet så förlorar den och pengar sätts till 0.
+
+om maxbet är över Player_x pengar kan hen call ändå. - call behövs inte kontrolleras om player har tillräckligt med pengar. Bara med att höja maxbet
+
+'''
+
 # spelare står som Player_tal eg Player_1, Player_2
 # total antal spelare står som playerNmbr (2-10)
 
@@ -23,7 +86,6 @@ def make_player_list(playerNmber):
         player = "Player_" +str(x)
         player_list.append(player)
     return player_list
-    
     
 # ändar värdet på money för key, player från dictionarien
 def change_money(list_of_money, player, money):
