@@ -1,10 +1,15 @@
 def startClient():
     import socket
-    PORT = 34269
+    PORT = 42069
+    ADDR = (socket.gethostname(), PORT)
+
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as clientSocket:
-        clientSocket.connect((socket.gethostname(), PORT))
+        clientSocket.connect(ADDR)
+        print(ADDR)
 
-        while True:
+        '''while True:
             msg = clientSocket.recv(256)
-            print(msg.decode("utf-8"))
+            print(msg.decode("utf-8"))'''
+
+startClient()

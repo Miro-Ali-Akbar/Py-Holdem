@@ -8,7 +8,6 @@ def serverStartInput(answer, prompt):
             print("Done")
             global notStarted
             notStarted = False
-            print(notStarted)
             break
 
 
@@ -24,6 +23,7 @@ def startServer():
     #sätter variabeln serverSocket som en socket med TCP protokoll och IPV4-anslutning
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as serverSocket:
         serverSocket.bind((socket.gethostname(), PORT))
+        print(socket.gethostname(), PORT)
         serverSocket.listen(10)
         serverSocket.settimeout(0.5)
         
@@ -31,9 +31,7 @@ def startServer():
         starterThread.start()
         ls = LoopStopper(5)
         while notStarted:
-            print("waiting")
             ls.run(range(10), lambda: acceptLoop(serverSocket))
-            time.sleep(2)
 
             
         #Dbg
