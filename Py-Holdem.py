@@ -112,6 +112,7 @@ def shuffle(deck):
 # ger en lista som ett deck varav korten är blandade. 
 def get_deck():
     return shuffle(make_deck)
+
 hand = [("Klöver", 9), ("Klöver", 2), ("Hjärter", 5), ("Hjärter", 7), ("Hjärter", 10)]
 hand2 =[("Spader", 6), ("Hjärter", 13), ("Klöver", 2), ("Hjärter", 1),("Ruter", 5), ("Klöver", 9), ("Ruter", 12)]
 board = [("Klöver", 8)]
