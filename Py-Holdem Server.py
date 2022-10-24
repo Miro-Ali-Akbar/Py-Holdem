@@ -7,14 +7,15 @@ def serverStartInput(answer, prompt):
         if inputAnswer == answer:
             print("Done")
             global notStarted
-            notStarted = [False]
+            notStarted = False
             print(notStarted)
             break
 
 
 
 def startServer():
-    notStarted = [True]
+    global notStarted
+    notStarted = True
     import socket
     import threading
     PORT = 42069
@@ -29,8 +30,7 @@ def startServer():
         #Startar en thread som stänger loopen när en viss input ges [WIP]
         starterThread.start()
         ls = LoopStopper(5)
-        while notStarted[0]:
-            print(notStarted[0])
+        while notStarted:
             print("waiting")
             ls.run(range(10), lambda: acceptLoop(serverSocket))
             time.sleep(2)

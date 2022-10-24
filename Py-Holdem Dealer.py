@@ -94,7 +94,7 @@ def change_money(list_of_money, player, money):
 
 # Roterar en lista för att gå runt i betting
 def rotate_order_list(player_list):
-    player_list.append(playerlist.pop(0))
+    player_list.append(player_list.pop(0))
 
 def make_deck():
     Färg = ["Hjärter", "Spader", "Klöver", "Ruter"]
@@ -157,4 +157,4 @@ dealCard(list(master.keys())[0])
 
 print(master)
 
-dealcard(list(master.keys())[0])
+dealCard(list(master.keys())[0])
