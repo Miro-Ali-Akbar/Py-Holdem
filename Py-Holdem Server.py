@@ -1,11 +1,14 @@
 #playerNmbr är antalet spelare (2-10)
 import time
+socketBox = []
+addressBox = []
+
 
 def serverStartInput(answer, prompt):
     while True:
         inputAnswer = input(prompt).lower()
         if inputAnswer == answer:
-            print("Done")
+            print("Done!")
             global notStarted
             notStarted = False
             break
@@ -29,45 +32,24 @@ def startServer():
         
         #Startar en thread som stänger loopen när en viss input ges [WIP]
         starterThread.start()
-        ls = LoopStopper(5)
         while notStarted:
-            ls.run(range(10), lambda: acceptLoop(serverSocket))
-
-            
-        #Dbg
+            acceptLoop(serverSocket)
         print("Outside loop!")
 
+        game = True
+        while game:
 
-
-#Inte min kod, tagen från Tony Flury, https://www.quora.com/In-Python-how-can-I-skip-an-iteration-in-a-for-loop-if-it-takes-longer-than-5-secs
-from threading import Timer 
-class LoopStopper: 
- 
-    def __init__(self, seconds): 
-        self._loop_stop = False
-        self._seconds = seconds
-  
-    def _stop_loop(self): 
-        self._loop_stop = True 
-    
-    def run(self, generator_expression, task): 
-        t = Timer(self._seconds, self._stop_loop) 
-        t.start() 
-        for _ in generator_expression: 
-            task() 
-            if self._loop_stop: 
-                break 
-        t.cancel()
 
 
 
 def acceptLoop(serverSocket):
     try:
         clientSocket, address = serverSocket.accept()
+        socketBox.append(clientSocket)
+        addressBox.append(address)
         print(f'{address} connected to the game! Input "start" to end the connection phase')
-        clientSocket.send(bytes("You have succesfully connected to the game!", "utf-8"))
-        #Appenda till lista [WIP]
-        return clientSocket, address
+        playerID = "player " + str(socketBox.index(clientSocket)+1)
+        clientSocket.send(bytes(f"You have succesfully connected to the game as {playerID}!", "utf-8"))
     except:
         pass
 

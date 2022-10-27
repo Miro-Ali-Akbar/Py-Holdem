@@ -8,8 +8,7 @@ def startClient():
         clientSocket.connect(ADDR)
         print(ADDR)
 
-        '''while True:
-            msg = clientSocket.recv(256)
-            print(msg.decode("utf-8"))'''
+        msg = clientSocket.recv(256)
+        print(msg.decode("utf-8"))
 
 startClient()
