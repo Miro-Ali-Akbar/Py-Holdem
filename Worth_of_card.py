@@ -213,3 +213,9 @@ def best_hand(hand1, hand2, board):
         return if_same_amount(hand1, hand2, board)
     else:
         return []
+'''
+board = [("Hjärter", 12), ("Hjärter", 7)]
+exempel1 = [("Klöver", 12), ("Ruter", 12)]
+exempel2 =[("Spader", 7), ("Hjärter", 13)]
+print(best_hand(exempel1, exempel2, board))
+'''
