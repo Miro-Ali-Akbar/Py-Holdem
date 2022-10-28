@@ -34,14 +34,17 @@ def startServer():
         starterThread.start()
         while notStarted:
             acceptLoop(serverSocket)
-        print("Outside loop!")
+        print("Next phase!")
 
-        game = True
+        '''game = True
         while game:
+            sendToAll(socketBox, f"Game has started with {len(addressBox)} players!")'''
+
+            
 
 
 
-
+#Tar emot requests, sitter på timeout
 def acceptLoop(serverSocket):
     try:
         clientSocket, address = serverSocket.accept()
@@ -52,6 +55,15 @@ def acceptLoop(serverSocket):
         clientSocket.send(bytes(f"You have succesfully connected to the game as {playerID}!", "utf-8"))
     except:
         pass
+
+
+
+#Skickar ett meddelande till alla anslutna enheter
+def sendToAll(socketBox, message):
+    for i in range(len(socketBox)):
+        currentClientSocket = socketBox[i]
+        currentClientSocket.send(bytes(message, "utf-8"))
+
 
 
 
